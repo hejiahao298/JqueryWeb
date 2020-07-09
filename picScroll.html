@@ -1,0 +1,122 @@
+
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+   <link rel ="stylesheet" type ="text/css" href ="hjh.css"/> 
+
+  <style type="text/css">
+     *{margin:0; padding:0;}
+	 li{ list-style:none; }
+	 img{ border:none; }
+	 body{ background:#ecfaff; }
+     .div1{ width:100%; height:640px; position:relative; overflow:hidden; }
+     ul{ position:absolute; top:0px; left:0px; z-index:1; margin:0px 250px 50px 250px }              /* z-index:1 层叠顺序，指ol为2放在ul上面 */
+	 ul li{ width:100%; height:640px;float:left;}
+	 ul img{ width:100%; height:640px; }
+	 .active{ padding:3px 8px; font-weight:bold; color:#FFFFFF; background:#ffb442; position:relative; bottom:2px; }
+	 ol{ position:absolute; right:5px; bottom:5px; z-index:2 ; margin:0px 250px 20px 250px}
+	 ol li{ float:left; margin-right:3px; display:inline; cursor:pointer; background:#fcf2cf; border:1px solid #f47500 ; border-radius:10px;}
+
+  </style>
+
+  <script src="jquery-1.11.3.min.js"></script>
+
+  <script>
+      $(function(){
+	      var timer = null;            //定时器放回值
+		  var aBtns = $("#div1 ol li");
+          var oUl = $("#div1 ul");
+		  var aLis = oUl.find("li"); 
+		  var iNow = 0;                //记录li的下标
+          
+
+          //设置定时器
+		  timer=setInterval(function(){              
+		      iNow++;
+			  scorll();
+		  },3000);
+          
+
+		  //图片滚动的方法
+		  function scorll(){
+		      aBtns.attr("class","").eq(iNow).attr("class","active");		  
+			  oUl.stop(true).animate({
+			  top:-640*iNow
+			  },500,function(){
+			    if(iNow==4){
+					aBtns.eq(0).attr("class","active");
+					iNow=0;
+				    oUl.css("top",0);}
+			  })
+		  }
+        
+
+		  //点击按钮时的方法
+	      aBtns.click(function(){
+		      iNow = $(this).index();   //记录点击的数组下标
+			  scorll();
+		  })
+         
+
+		  //移入移出ul li时的方法
+		  aLis.hover(function(){
+		      clearInterval(timer);
+		  },
+		  function(){
+		     timer=setInterval(function(){
+		      iNow++;
+			  scorll();
+		  },1000);
+		  }
+		  )
+
+		  $("#nav1 ul li").eq(2).css({
+	     "background-color":"#828282",
+		 "border-radius":"15px"
+	  })
+
+	  })
+  </script>
+
+ </head>
+ <body>
+       <div id="nav" class="">
+     <div id="nav1" class="">
+      <ul>
+	  <li class="navimg"></li>
+	  <li><a href="picchange.html">移动</a></li>
+	  <li><a href="picScroll.html">滚动</a></li>
+	  <li><a href="index.html">点击</a></li>
+	  <ul>
+	  </div>
+	   <div id="nav2" class="">
+		<div id="regist" class=""><a href="hjh.html">用户</a></div>
+		 <div id="github" class=""><a href="https://github.com/hejiahao298/JqueryWeb.git">github</a></div>
+	  </div>
+     </div>
+	  </div>
+   <div id="back">
+     <div id="div1" class="div1">
+	   <ul>
+	     <li><img src="img/pic1.jpeg" alt="背景1"></li>
+	     <li><img src="img/pic2.jpg" alt="背景2"></li>
+	     <li><img src="img/pic3.jpg" alt="背景3"></li>
+	     <li><img src="img/pic4.jpg" alt="背景4"></li>
+		 <li><img src="img/pic1.jpeg" alt="背景1"></li>
+	   </ul>
+
+	   <ol>
+	     <li class="active">1</li>
+	     <li>2</li>
+	     <li>3</li>
+	     <li>4</li>
+	   </ol>
+	 </div>
+</div>
+ </body>
+</html>

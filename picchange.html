@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+
+  <link rel ="stylesheet" type ="text/css" href ="hjh.css"/> 
+
+  <style type="text/css">
+  *{margin:0px; padding:0px}
+    
+  #navi{ width:1519px; height:620px;  background-size:cover; background-image:url("img/img4.jpg");position:relative; top:-4px}
+  #navi ul{ list-style-type:none; width:1000px; height:400px; top:150px; left:250px;position:absolute}
+  #navi ul li{ list-style-type:none; width:150px; height:400px; float:left; border:1px solid white;display:block;color:rgba(0,0,0,0.5);}
+  </style>
+
+ <script src="jquery-1.11.3.min.js"></script>
+
+ <script>
+    $(function(){
+    
+	//设置第一个li为展开，并为li添加背景图片
+    $("#navi ul li:first").css({
+		width:"542px",
+		background:"url(img/pic1.jpeg)",
+	    position:"relative",
+		"background-size":"cover"
+		})
+
+    $("#navi ul li").eq(1).css({		
+		background:"url(img/pic2.jpg)",
+		"background-size":"cover"
+		})
+    $("#navi ul li").eq(2).css({		
+		background:"url(img/pic3.jpg)",
+		"background-size":"cover"
+		})
+    $("#navi ul li").eq(3).css({		
+		background:"url(img/pic4.jpg)",
+		"background-size":"cover",
+		position:"absolute",                //将最后一个li设置为绝对定位。防止抖动
+		top:"0px",
+		right:"0px"
+		})
+
+    //通过index关闭上一个li
+	$("#navi ul li").mouseover(function(){
+	   $("#navi ul li").eq(index).stop(true).animate({
+	      width:"150px",
+	   },500,"linear")
+    })
+
+    var index;                           //记录调用li的数组下标
+	var i=0;                             //记录调用hover的次数，当i==1时关闭第一个li
+	$("#navi ul li").mouseover(function(){
+       i=i+1;                             //每调用一次i加一
+	   if(i>2)i=2;
+	   $(this).stop(true).animate({		
+	      width:"542px",
+	   },500,"linear")
+
+       if(i==1){	                         //第一次调用hover关闭最初的li
+   	      $("#navi ul li:first").stop(true).animate({
+	      width:"150px",
+	      },500,"linear")
+       }
+
+	   index=$(this).index()              //记录li的下标
+	})
+      
+	  $("#nav1 ul li").eq(1).css({
+	     "background-color":"#828282",
+		 "border-radius":"15px"
+	  })
+    
+})
+
+ </script>
+
+ </head>
+ <body>
+   <div id="nav" class="">
+     <div id="nav1" class="">
+      <ul>
+	  <li class="navimg"></li>
+	  <li class="change"><a href="picchange.html">移动</a></li>
+	  <li><a href="picScroll.html">滚动</a></li>
+	  <li><a href="index.html">点击</a></li>
+	  </ul>
+	  </div>
+	  	<div id="nav2" class="">
+		<div id="regist" class=""><a href="hjh.html">用户</a></div>
+		<div id="github" class=""><a href="https://github.com/hejiahao298/JqueryWeb.git">github</a></div>
+	  </div>
+     </div>
+	  </div>
+ <div id="navi" >
+ <ul>
+ <li id="pic1"></li>
+ <li id="pic2"></li>
+ <li id="pic3"></li>
+ <li id="pic4"></li>
+ </ul>
+ </div>
+ </body>
+
+
+</html>
